@@ -1,0 +1,55 @@
+body {
+    background: #eee;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 20px;
+}
+
+a, a:visited, a:hover, a:focus, a:link {
+    color: #00897b;
+    text-decoration: none;
+}
+
+div#game-area {
+    margin: auto;
+
+}
+
+div.item {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    border: 2px solid #888;
+    margin: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+div.item.filled {
+    background: #009688;     
+}
+
+div.item.selected {
+    box-shadow: 0px 0px 5px #e0f2f1;
+    background: #80cbc4;
+}
+
+input {
+    border: 2px solid #AAA;
+    font-family: "Open Sans";
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+    width: 50px;
+}
+
+input[type="submit"] {
+    width: auto; 
+    background: #80cbc4;
+    cursor: pointer;
+}
+
+li {
+    display: block;   
+}
+                

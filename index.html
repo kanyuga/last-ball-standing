@@ -2,91 +2,7 @@
     <head>
         <title>Weird game I know not the name of</title>
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-        <style type="text/css">
-            body {
-                background: #eee;
-                text-align: center;
-                font-family: "Open Sans";
-                font-size: 20px;
-            }
-            
-            div#game-area {
-                margin: auto;
-                
-            }
-            
-            div.item {
-                height: 40px;
-                width: 40px;
-                display: inline-block;
-                border: 2px solid #888;
-                margin: 5px;
-                border-radius: 50%;
-                
-
-/*background-image: -ms-radial-gradient(center, circle farthest-side, #333333 0%, #888888 100%);
-
-
-background-image: -moz-radial-gradient(center, circle farthest-side, #333333 0%, #888888 100%);
-
-
-background-image: -o-radial-gradient(center, circle farthest-side, #333333 0%, #888888 100%);
-
-
-background-image: -webkit-gradient(radial, center center, 0, center center, 487, color-stop(0, #333333), color-stop(1, #888888));
-
-
-background-image: -webkit-radial-gradient(center, circle farthest-side, #333333 0%, #888888 100%);
-
-
-background-image: radial-gradient(circle farthest-side at center, #333333 0%, #888888 100%);*/
-            }
-            
-            div.item.filled {
-                background: #009688;
-                
-/*background-image: -ms-radial-gradient(center, circle farthest-side, #12A1A6 0%, #095457 100%);
-
-
-background-image: -moz-radial-gradient(center, circle farthest-side, #12A1A6 0%, #095457 100%);
-
-
-background-image: -o-radial-gradient(center, circle farthest-side, #12A1A6 0%, #095457 100%);
-
-
-background-image: -webkit-gradient(radial, center center, 0, center center, 487, color-stop(0, #12A1A6), color-stop(1, #095457));
-
-
-background-image: -webkit-radial-gradient(center, circle farthest-side, #12A1A6 0%, #095457 100%);
-
-
-background-image: radial-gradient(circle farthest-side at center, #12A1A6 0%, #095457 100%);*/
-        
-            }
-            
-            div.item.selected {
-                box-shadow: 0px 0px 5px #e0f2f1;
-                background: #80cbc4;
-            }
-            
-            input {
-                border: 2px solid #AAA;
-                font-family: "Open Sans";
-                padding: 5px;
-                font-size: 20px;
-                text-align: center;
-                width: 50px;
-            }
-            
-            input[type="submit"] {
-                width: auto;   
-            }
-            
-            li {
-                display: block;   
-            }
-                
-        </style>
+        <link type="text/css" rel="stylesheet" href="style.css"/>
     </head>
     <body>
         <h2>Rules of the game</h2>
@@ -94,8 +10,9 @@ background-image: radial-gradient(circle farthest-side at center, #12A1A6 0%, #0
             <li>Aim of the game is to have one ball remaining.</li>
             <li>Select a ball and an empty slot to jump to.</li>
             <li>There must be a single ball between the selected ball and the slot to be jumped to.</li>
-            <li>That's all!</li>
+            <li>That's it!</li>
         </ul>
+        <p> The source code is on <a href="https://github.com/kanyuga/weird_game">Github</a></p>
         <div class="form">
             <form id="reset-form">
                 Size of Grid:
