@@ -1,26 +1,28 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Weird game I know not the name of</title>
+        <title>Last Ball Standing: Weird game I know not the name of</title>
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <link type="text/css" rel="stylesheet" href="style.css"/>
     </head>
     <body>
-        <h2>Rules of the game</h2>
-        <ul>
-            <li>Aim of the game is to have one ball remaining.</li>
-            <li>Select a ball and an empty slot to jump to.</li>
-            <li>There must be a single ball between the selected ball and the slot to be jumped to.</li>
-            <li>That's it!</li>
-        </ul>
-        <p> The source code is on <a href="https://github.com/kanyuga/weird_game">Github</a></p>
+        <h2>How to Play</h2>
+        <ol>
+            <li>Select a ball (colour-filled circle) and an empty slot (grey lifeless ring) to jump to.</li>
+            <li>In the process you must jump over a single ball.</li>
+            <li>The ball that has been jumped over disappears like magic (Disclaimer: <em>not real magic</em>).</li>
+            <li>The aim of the game is to only have the last ball standing.</li>
+        </ol>
+        <p>The source code is on <a target="_blank" href="https://github.com/kanyuga/weird_game">Github</a></p>
         <div class="form">
             <form id="reset-form">
                 Size of Grid:
-                <input type="number" name="rows" id="rows" size = "1" value="4"/> x
-                <input type="number" id="cols" name="cols" size = "1" value="4"/>
+                <input type="number" id="cols" name="cols" size = "1" value="4"/> x
+                <input type="number" name="rows" id="rows" size = "1" value="4"/>
                 <input type="submit" value="Let's Do This"/>
             </form>
         </div>
+        <br/>
         <div id="game-area"></div>
         <script type="text/javascript" src="script.js"></script>
     </body>
