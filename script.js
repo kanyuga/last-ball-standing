@@ -1,63 +1,78 @@
-currentSpot = false;
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function getSpot(row, col) {
-    console.log(row, col);
-    return $("#game-area .item[data-row=" + row + "][data-col=" + col + "]");
-}
-
-function init(rows, cols) {
-    currentSpot = null;
-    var $gamearea = $('#game-area');
-    $gamearea.html("");
-    for (i = 1; i <= rows; i++) {
-        for (j = 1; j <= cols; j++) {
-            $gamearea.append("<div class='item filled' data-row=" + i + " data-col=" + j + "></div>");
-        }
-        $gamearea.append("<br/>");
-    }
-    getSpot(getRandomInt(1, rows + 1), getRandomInt(1, cols + 1)).removeClass("filled");
+function Game(gamearea, rows, cols) {
+    this.currentSpot = null;
+    this.gameArea = $(gamearea);
+    this.itemClass = "item";
+    this.selectedClass = "selected";
+    this.filledClass = "filled";
+    this.rows = rows;
+    this.cols = cols;
     
-    $(".item").on("click", function() {
-        if ($(this).hasClass("filled")) {
-            if (!currentSpot) {
-                currentSpot = $(this);
-                $(this).addClass("selected");      
-            } else {
-                currentSpot.removeClass("selected");
-                currentSpot = null;
+    this.init = function() {
+        var self = this;
+        self.currentSpot = null;
+        self.gameArea.html("");
+        for (i = 1; i <= self.rows; i++) {
+            for (j = 1; j <= self.cols; j++) {
+                self.gameArea.append("<div class='" + self.itemClass + " " + self.filledClass + "' data-row=" + i + " data-col=" + j + "></div>");
             }
-        } else {
-            if (currentSpot) {
-                var rowdiff = $(this).data("row") - currentSpot.data("row");
-                var coldiff = $(this).data("col") - currentSpot.data("col");
-                //console.log(rowdiff, coldiff);
-                if ((Math.abs(coldiff) == 0 || Math.abs(coldiff) == 2) && (Math.abs(rowdiff) == 0 || Math.abs(rowdiff) == 2) && (Math.abs(coldiff) == 2 || Math.abs(rowdiff) == 2)) {
-                    var col = ($(this).data("col") + currentSpot.data("col")) / 2;
-                    var row = ($(this).data("row") + currentSpot.data("row")) / 2;
-                    var $over = getSpot(row, col);
-                    if ($over.hasClass("filled")) {
-                        $over.removeClass("filled");
-                        currentSpot.removeClass("selected filled");
-                        currentSpot = null;
-                        $(this).addClass("filled");
-                        if ($("#game-area .item.filled").length == 1) {
-                            alert("You win!!");
+            self.gameArea.append("<br/>");
+        }
+        self.getSpot(getRandomInt(1, rows + 1), getRandomInt(1, cols + 1)).removeClass(self.filledClass);
+        $("." + self.itemClass, self.gameArea).on("click", function() {
+            if ($(this).hasClass(self.filledClass)) {
+                if (!self.currentSpot) {
+                    self.currentSpot = $(this).addClass(self.selectedClass);
+                } else {
+                    self.currentSpot.removeClass(self.selectedClass);
+                    self.currentSpot = null;
+                }
+            } else {
+                if (self.currentSpot) {
+                    //console.log("here");
+                    var rowDiff = Math.abs($(this).data("row") - self.currentSpot.data("row")),
+                        colDiff = Math.abs($(this).data("col") - self.currentSpot.data("col"));
+                    if ((colDiff === 0 || colDiff === 2) && (rowDiff === 0 || rowDiff === 2) && (colDiff === 2 || rowDiff === 2)) {
+                        var over = self.getSpot(($(this).data("row") + self.currentSpot.data("row")) / 2, 
+                                                ($(this).data("col") + self.currentSpot.data("col")) / 2);
+                        if (over.hasClass(self.filledClass)) {
+                            over.removeClass(self.filledClass);
+                            self.currentSpot.removeClass(self.selectedClass + " " + self.filledClass);
+                            self.currentSpot = null;
+                            $(this).addClass(self.filledClass);
+                            if ($("." + self.itemClass + "." + self.filledClass, self.gameArea).length === 1) {
+                                alert("You win!!");
+                            }
                         }
                     }
                 }
-            }           
-        }
-    });
+            }
+        });
+    };
+    
+    this.getSpot = function(row, col) {
+        return $("." + this.itemClass + "[data-row=" + row + "][data-col=" + col + "]", this.gameArea);
+    };
+    
+    this.reset = function(rows, cols) {
+        console.log(this.rows, this.cols);
+        this.rows = rows;
+        this.cols = cols;
+        console.log(this.rows, this.cols);
+        this.init();
+    };
 }
 
-$(function(){
-    init(4, 4);
+
+$(function() {
+    game = new Game("#game-area", 4, 4);
+    game.init();
     $('#reset-form').on("submit", function(event) {
-        init(parseInt($("#rows").val()), parseInt($("#cols").val()));
+        game.reset(parseInt($("#rows").val()), parseInt($("#cols").val()));
         event.preventDefault();
     });
 });
